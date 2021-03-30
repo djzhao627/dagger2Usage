@@ -18,7 +18,7 @@ dependencies {
 2. 创建用于注入的Component和Module
 
 ```kotlin
-@Singleton
+@Singleton // 设置单例
 @Component(modules = [AppModule::class, PresenterModule::class,NetworkModule::class, WikiModule::class])
 interface AppComponent {
     fun inject(target: HomepageActivity)
@@ -93,6 +93,7 @@ class WikiModule {
 ```kotlin
 class WikiApplication : Application() {
     
+    // 确保AppComponent在应用中也是单例
     lateinit var wikiComponent: AppComponent
     
     private fun initDagger(app: WikiApplication): AppComponent =
@@ -103,6 +104,8 @@ class WikiApplication : Application() {
     override fun onCreate() {
         super.onCreate()
         wikiComponent = initDagger(this)
+        // 或者使用
+        // wikiComponent = DaggerAppComponent.create()
     }
 }
 ```
