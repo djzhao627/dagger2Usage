@@ -104,7 +104,7 @@ class WikiApplication : Application() {
     override fun onCreate() {
         super.onCreate()
         wikiComponent = initDagger(this)
-        // 或者使用
+        // 或者使用(AppModule的构造器不需要传参的时候)
         // wikiComponent = DaggerAppComponent.create()
     }
 }
